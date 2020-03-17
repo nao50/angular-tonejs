@@ -1,0 +1,12 @@
+<!-- <div class="piano">
+  <div class="octive" *ngFor="let o of octives; let lst = last;">
+    <span class="octive-num">{{o}}</span>
+    <div class="key" *ngFor="let key of notes; " (mouseover)="msover(key+o)" (mousedown)="msdown=true;play(key+o);" (mouseup)="msdown=false" [ngClass]="{'sharp':( key.indexOf('#') >= 1), 'last':lst}">
+    {{key}}
+    </div>
+  </div>
+</div> -->
+
+<button (click)="playNote()" mat-raised-button color="primary">Click me to play note!</button>
+
+<router-outlet></router-outlet>
