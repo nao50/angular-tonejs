@@ -7,11 +7,7 @@ import * as Tone from 'tone';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // title = 'angular-tonejs';
-  // notes: string[] = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-  // octives: number[] = [1, 2, 3, 4, 5, 6];
-  // msdown = false;
-  synth: any;
+  // synth: any;
 
   constructor() {
     // synth.triggerAttackRelease('C4', '8n');
@@ -51,8 +47,8 @@ export class AppComponent {
   // }
 
   playNote() {
-    this.synth = new Tone.Synth().toMaster();
-    this.synth.triggerAttackRelease('C4', '8n');
+    const synth = new Tone.Synth().toMaster();
+    synth.triggerAttackRelease('C4', '8n');
   }
 
 }
