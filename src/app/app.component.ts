@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, HostListener, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import * as Tone from 'tone';
 
 @Component({
@@ -6,12 +6,25 @@ import * as Tone from 'tone';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   // synth: any;
+
+  linePt1: SVGPoint;
+  linePt2: SVGPoint;
+  @ViewChild('circle1', { read: ElementRef })
+  circle1: ElementRef;
+  @ViewChild('circle2', { read: ElementRef })
+  circle2: ElementRef;
+  @ViewChild('svg', { read: ElementRef })
+  svg: ElementRef;
+
+  // @HostListener( 'document:click', [ '$event' ] )
+  // onTest(event: MouseEvent) {
+  //   console.log('event: ', event);
+  // }
 
   constructor() {
     // synth.triggerAttackRelease('C4', '8n');
-
     // this.synth = new Tone.PolySynth(1, Tone.Synth).toMaster();
   }
 
@@ -46,8 +59,27 @@ export class AppComponent {
   //   this.synth.triggerAttackRelease(note, '8n');
   // }
 
+  ngAfterViewInit() {
+    const svg = this.svg.nativeElement;
+    const c1 = this.circle1.nativeElement as SVGCircleElement;
+    const c2 = this.circle2.nativeElement as SVGCircleElement;
+
+    const matrix1 = c1.getCTM();
+    const matrix2 = c2.getCTM();
+
+    const pt = svg.createSVGPoint();
+    this.linePt1 = pt.matrixTransform(matrix1);
+    this.linePt2 = pt.matrixTransform(matrix2);
+  }
+
+  click(event: MouseEvent){
+    console.log('linePt1: ', this.linePt1);
+    console.log('linePt2: ', this.linePt2);
+  }
+
   playNote() {
     const synth = new Tone.Synth().toMaster();
+    // synth.triggerAttackRelease('C4', '8n');
     synth.triggerAttackRelease('C4', '8n');
   }
 

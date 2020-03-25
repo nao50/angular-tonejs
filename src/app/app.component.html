@@ -1,12 +1,22 @@
-<!-- <div class="piano">
-  <div class="octive" *ngFor="let o of octives; let lst = last;">
-    <span class="octive-num">{{o}}</span>
-    <div class="key" *ngFor="let key of notes; " (mouseover)="msover(key+o)" (mousedown)="msdown=true;play(key+o);" (mouseup)="msdown=false" [ngClass]="{'sharp':( key.indexOf('#') >= 1), 'last':lst}">
-    {{key}}
-    </div>
-  </div>
-</div> -->
+<svg width="300" height="300" #svg>
 
+  <g transform="translate(100, 100)">
+    <circle cx="0" cy="0" r="20" style="fill:red" #circle1></circle>
+  </g>
+  
+  <g transform="translate(250, 150)" >
+    <circle cx="0" cy="0" r="20" style="fill:blue" #circle2></circle>
+  </g>
+
+  <g>
+    <line [attr.x1]="linePt1?.x" [attr.y1]="linePt1?.y" [attr.x2]="linePt2?.x" [attr.y2]="linePt2?.y" stroke="#ff9900" stroke-width="2"></line>
+  </g>
+
+</svg>
+
+<button mat-raised-button color="primary" (click)="click($event)">Click me!</button>
+
+<!--  -->
 <button (click)="playNote()" mat-raised-button color="primary">Click me to play note!</button>
 
 <router-outlet></router-outlet>
